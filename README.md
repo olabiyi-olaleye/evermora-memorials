@@ -1,6 +1,6 @@
 # Evermora
 
-[![CI](https://github.com/DataByOlabiyi/evermora-memorials/actions/workflows/ci.yml/badge.svg)](https://github.com/DataByOlabiyi/evermora-memorials/actions/workflows/ci.yml)
+[![CI](https://github.com/olabiyi-olaleye/evermora-memorials/actions/workflows/ci.yml/badge.svg)](https://github.com/olabiyi-olaleye/evermora-memorials/actions/workflows/ci.yml)
 
 Evermora gives a family one permanent link for remembering someone. On it they can put a short biography, life stories and milestones, a photo gallery, tributes from visitors, and the practical details people need for the funeral: the wake, the service and the burial, each with its own time, venue, directions and streaming link. If a detail changes or an event is cancelled, the page says so plainly.
 
@@ -103,7 +103,7 @@ Supabase CLI convention, rather than inside `packages/database/`.
 ## Install
 
 ```bash
-git clone https://github.com/DataByOlabiyi/evermora-memorials.git
+git clone https://github.com/olabiyi-olaleye/evermora-memorials.git
 cd evermora-memorials
 nvm use
 npm install           # installs every workspace from the root
