@@ -1,0 +1,6 @@
+# `drizzle-kit pull` output — generated, not committed. The schema authority is
+# supabase/migrations/. Regenerate locally with: npm run db:pull
+schema.ts
+relations.ts
+meta/
+*.sql

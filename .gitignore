@@ -1,0 +1,90 @@
+# ---------------------------------------------------------------------------
+# Evermora — root .gitignore
+# ---------------------------------------------------------------------------
+
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Build output / framework caches
+.next/
+out/
+build/
+dist/
+.turbo/
+*.tsbuildinfo
+
+# Serwist-generated service worker (built from apps/*/sw.ts)
+apps/*/public/sw.js
+apps/*/public/sw.js.map
+
+# Next.js generated ambient types (recreated by `next typegen` / `next build`)
+next-env.d.ts
+
+# Files regenerated locally by `next dev`
+apps/*/AGENTS.md
+apps/*/CLAUDE.md
+
+# Test / coverage output
+coverage/
+test-results/
+playwright-report/
+blob-report/
+.playwright/
+playwright/.cache/
+
+# Environment files — never commit real values
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+*.env
+
+# Supabase local state
+.branches/
+.temp/
+supabase/.branches/
+supabase/.temp/
+**/supabase/.env
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm/
+
+# Editor / IDE (private, per-developer)
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.shared.json
+.idea/
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Vercel
+.vercel/
+
+# Misc
+*.pem
+.cache/
+tmp/
+
+# Local editor/tool settings
+.claude/

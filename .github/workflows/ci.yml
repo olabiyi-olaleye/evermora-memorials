@@ -1,0 +1,195 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Cancel superseded runs on the same ref.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  quality-gates:
+    name: Quality gates (Node 22)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Cache Turborepo
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: turbo-${{ runner.os }}-${{ github.sha }}
+          restore-keys: |
+            turbo-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Dependency audit (production deps, high+ severity)
+        # Scoped to production dependencies: a dev-only tool vulnerability
+        # (e.g. drizzle-kit's transitive esbuild dev-server advisory) affects
+        # no deployed surface and would make this gate cry wolf. Anything
+        # reachable at runtime still fails the build.
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Format check
+        run: npm run format:check
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+  database:
+    name: Database & RLS (pgTAP)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: 2.105.0
+
+      - name: Start local Supabase stack
+        run: supabase start
+
+      - name: Verify schema rebuilds from migrations + load seed
+        run: supabase db reset
+
+      - name: Assert migrations fully describe the database
+        run: |
+          # `supabase db reset` already replayed every migration into the running
+          # DB. `db diff` then compares it against a fresh shadow built from the
+          # same migrations — anything other than platform-managed extension
+          # noise (pg_net etc., pre-enabled in the running stack but not the
+          # shadow) means the committed migrations do not fully describe the schema.
+          diff=$(supabase db diff || true)
+          echo "$diff"
+          drift=$(printf '%s\n' "$diff" \
+            | grep -iE '^(create|alter|drop) ' \
+            | grep -ivE 'extension .*"(pg_net|pg_graphql|pg_stat_statements|pgcrypto|pg_cron|supabase_vault|pgjwt|http)"' \
+            || true)
+          if [ -n "$drift" ]; then
+            echo "::error::committed migrations do not fully describe the schema:"
+            printf '%s\n' "$drift"
+            exit 1
+          fi
+
+      - name: RLS / security tests
+        run: supabase test db
+
+      - name: Assert generated types are up to date
+        run: |
+          supabase gen types typescript --local > /tmp/database.types.ts
+          diff -u packages/database/src/supabase/database.types.ts /tmp/database.types.ts
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Domain persistence integration tests
+        env:
+          # transaction-scoped RLS against the running local stack (offset ports)
+          DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:54422/postgres
+        run: npm run test:integration
+
+  e2e:
+    name: End-to-end (Playwright)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: 2.105.0
+
+      - name: Start local Supabase stack
+        run: supabase start
+
+      - name: Load schema + seed
+        run: supabase db reset
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Cache Turborepo
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: turbo-${{ runner.os }}-${{ github.sha }}
+          restore-keys: |
+            turbo-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Write app env files from the local Supabase stack
+        # The local anon / service-role keys and offset ports are well-known
+        # dev defaults (see .env.example), not secrets — the `database` job
+        # already hard-codes the same local DATABASE_URL.
+        run: |
+          set -a
+          . <(supabase status -o env)
+          set +a
+          for app in web family-portal platform-admin; do
+            {
+              echo "APP_ENV=development"
+              echo "NEXT_PUBLIC_APP_URL=http://localhost:3000"
+              echo "NEXT_PUBLIC_FAMILY_URL=http://localhost:3001"
+              echo "NEXT_PUBLIC_ADMIN_URL=http://localhost:3002"
+              echo "NEXT_PUBLIC_SUPABASE_URL=$API_URL"
+              echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=$ANON_KEY"
+              echo "SUPABASE_SERVICE_ROLE_KEY=$SERVICE_ROLE_KEY"
+              echo "DATABASE_URL=$DB_URL"
+            } > "apps/$app/.env.local"
+          done
+
+      - name: Run Playwright tests
+        run: npx playwright test
+
+      - name: Upload Playwright report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7

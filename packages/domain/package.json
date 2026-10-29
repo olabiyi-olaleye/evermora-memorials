@@ -1,0 +1,28 @@
+{
+  "name": "@evermora/domain",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Framework-independent Evermora business/domain layer. No React, no Next.js, no browser APIs.",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "rimraf --glob .turbo coverage *.tsbuildinfo"
+  },
+  "dependencies": {
+    "@evermora/types": "*",
+    "@evermora/utils": "*",
+    "zod": "^4.5.4"
+  },
+  "devDependencies": {
+    "@evermora/config": "*",
+    "eslint": "^9.39.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "stream",
+  "globalEnv": ["NODE_ENV", "APP_ENV", "VERCEL", "VERCEL_ENV", "CI"],
+  "globalPassThroughEnv": ["NEXT_PUBLIC_*", "SUPABASE_*", "DATABASE_URL"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {},
+    "typecheck": {},
+    "test": {
+      "outputs": []
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@evermora/types",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared Evermora TypeScript types and contracts: domain enums, roles, permissions, and event names.",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "rimraf --glob .turbo coverage *.tsbuildinfo"
+  },
+  "devDependencies": {
+    "@evermora/config": "*",
+    "eslint": "^9.39.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11"
+  }
+}

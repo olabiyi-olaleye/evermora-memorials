@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Evermora Next.js App",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "lib": ["DOM", "DOM.Iterable", "ES2023"],
+    "jsx": "preserve",
+    "jsxImportSource": "react",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowJs": true,
+    "noEmit": true,
+    "incremental": true,
+    "plugins": [{ "name": "next" }]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "@evermora/utils",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Genuinely reusable, side-effect-free utility functions. No business rules live here.",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "rimraf --glob .turbo coverage *.tsbuildinfo"
+  },
+  "devDependencies": {
+    "@evermora/config": "*",
+    "eslint": "^9.39.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11"
+  },
+  "dependencies": {
+    "qrcode-generator": "2.0.4"
+  }
+}

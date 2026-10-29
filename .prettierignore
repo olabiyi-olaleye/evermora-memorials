@@ -1,0 +1,23 @@
+node_modules
+.next
+.turbo
+dist
+build
+out
+coverage
+playwright-report
+test-results
+package-lock.json
+*.tsbuildinfo
+next-env.d.ts
+
+# Verbatim copy of the canonical architecture decision record
+docs/architecture/EVERMORA-MASTER-PROMPT.md
+
+# Generated database artifacts
+packages/database/src/supabase/database.types.ts
+packages/database/src/drizzle/schema.ts
+packages/database/src/drizzle/relations.ts
+packages/database/src/drizzle/meta
+supabase/.branches
+supabase/.temp

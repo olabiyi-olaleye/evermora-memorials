@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@import "../../../../packages/ui/src/styles.css";
+
+/* Scan the shared design-system source so its class names reach this app's CSS. */
+@source "../../../../packages/ui/src";
+
+/*
+ * The public site (marketing + memorial) now lives entirely on the shared
+ * token system. The ivory `canvas` ground is the Evermora default; the
+ * memorial and marketing shells inherit it here rather than repainting.
+ */
+body {
+  background: var(--color-canvas);
+  color: var(--color-fg);
+}

@@ -1,0 +1,39 @@
+{
+  "name": "@evermora/database",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Evermora database infrastructure: Supabase clients, Drizzle client, repository contracts, and the authoritative SQL migration history.",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./src/index.ts",
+    "./supabase/server": "./src/supabase/server.ts",
+    "./supabase/browser": "./src/supabase/browser.ts",
+    "./drizzle": "./src/drizzle/client.ts",
+    "./persistence": "./src/persistence/index.ts",
+    "./repositories": "./src/repositories/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "db:pull": "drizzle-kit pull && node scripts/fix-introspection.mjs",
+    "clean": "rimraf --glob .turbo coverage *.tsbuildinfo"
+  },
+  "dependencies": {
+    "@evermora/domain": "*",
+    "@evermora/types": "*",
+    "@supabase/ssr": "^0.12.5",
+    "@supabase/supabase-js": "^2.112.4",
+    "drizzle-orm": "^0.45.2",
+    "postgres": "^3.4.7"
+  },
+  "devDependencies": {
+    "@evermora/config": "*",
+    "@types/node": "^22.20.0",
+    "drizzle-kit": "^0.31.10",
+    "eslint": "^9.39.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11"
+  }
+}
