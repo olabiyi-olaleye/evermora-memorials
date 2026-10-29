@@ -5,6 +5,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 # Cancel superseded runs on the same ref.
 concurrency:
@@ -125,6 +126,8 @@ jobs:
 
   e2e:
     name: End-to-end (Playwright)
+    # Run manually from the Actions tab (needs the local Supabase stack and seed data).
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
 
     steps:
