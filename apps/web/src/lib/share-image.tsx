@@ -40,9 +40,30 @@ export async function renderMemorialShareImage(slug: string): Promise<ImageRespo
   const lifespan = formatLifespan(memorial.dateOfBirth, memorial.dateOfDeath);
   const photo = await pickSharePhoto(memorial);
 
-  return photo?.url
-    ? renderPhotoCard(memorial.fullName, lifespan, photo.url)
+  const photoSrc = photo?.url ? await loadPhotoAsDataUrl(photo.url) : null;
+  return photoSrc
+    ? renderPhotoCard(memorial.fullName, lifespan, photoSrc)
     : renderInitialsCard(memorial.fullName, lifespan);
+}
+
+/**
+ * Downloads the photo here and hands it to ImageResponse as a data URL.
+ * Since Next 16.4, next/og refuses to fetch images from private or loopback
+ * addresses (SSRF protection), which blocks the local Supabase stack used in
+ * development and CI. The URL always comes from our own storage, never from
+ * the request, so fetching it ourselves is safe. If the download fails, the
+ * caller falls back to the initials card instead of erroring.
+ */
+async function loadPhotoAsDataUrl(url: string): Promise<string | null> {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const type = res.headers.get("content-type") ?? "image/jpeg";
+    const bytes = Buffer.from(await res.arrayBuffer());
+    return `data:${type};base64,${bytes.toString("base64")}`;
+  } catch {
+    return null;
+  }
 }
 
 /**

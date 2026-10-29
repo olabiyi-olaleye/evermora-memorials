@@ -13,7 +13,7 @@ test("a family member requests a service and sees it in their list", async ({ pa
 
   await page.getByRole("main").getByRole("link", { name: "Josephine Adaeze Okafor" }).click();
   await expect(page).toHaveURL(/\/memorials\/[0-9a-f-]{36}$/, nav);
-  await page.getByRole("link", { name: "Services" }).click();
+  await page.getByRole("link", { name: "Services", exact: true }).click();
   await expect(page).toHaveURL(/\/services$/, nav);
 
   // Name + email are pre-filled from the account.

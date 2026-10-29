@@ -47,7 +47,7 @@ for (const [linkName, urlPattern] of [
     await signIn(page);
     await page.getByRole("main").getByRole("link", { name: "Josephine Adaeze Okafor" }).click();
     await expect(page).toHaveURL(/\/memorials\/[0-9a-f-]{36}$/, nav);
-    await page.getByRole("link", { name: linkName }).click();
+    await page.getByRole("link", { name: linkName, exact: true }).click();
     await expect(page).toHaveURL(urlPattern, nav);
     await expect(page).toHaveTitle(new RegExp(linkName), nav);
     const results = await scan(page);

@@ -21,7 +21,7 @@ test("owner uploads a large photo and it appears in the gallery", async ({ page 
 
   await page.getByRole("main").getByRole("link", { name: "Josephine Adaeze Okafor" }).click();
   await expect(page).toHaveURL(/\/memorials\/[0-9a-f-]{36}$/, nav);
-  await page.getByRole("link", { name: "Photos & memories" }).click();
+  await page.getByRole("link", { name: "Photos & memories", exact: true }).click();
   await expect(page).toHaveURL(/\/photos$/, nav);
 
   const countHeading = page.getByRole("heading", { name: /^Photos \(\d+\)$/ });

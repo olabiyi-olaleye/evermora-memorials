@@ -20,7 +20,7 @@ test("owner sees the link, generates a QR asset, and it resolves on the public s
 
   await page.getByRole("main").getByRole("link", { name: "Josephine Adaeze Okafor" }).click();
   await expect(page).toHaveURL(/\/memorials\/[0-9a-f-]{36}$/, nav);
-  await page.getByRole("link", { name: "Share & QR" }).click();
+  await page.getByRole("link", { name: "Share & QR", exact: true }).click();
   await expect(page).toHaveURL(/\/share$/, nav);
 
   // The memorial link is shown.

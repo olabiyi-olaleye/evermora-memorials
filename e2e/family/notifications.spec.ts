@@ -25,7 +25,7 @@ test("a member is notified when the owner publishes a family update, and can mar
 
   await owner.getByRole("main").getByRole("link", { name: "Josephine Adaeze Okafor" }).click();
   await expect(owner).toHaveURL(/\/memorials\/[0-9a-f-]{36}$/, nav);
-  await owner.getByRole("link", { name: "Family updates" }).click();
+  await owner.getByRole("link", { name: "Family updates", exact: true }).click();
   await expect(owner).toHaveURL(/\/updates$/, nav);
 
   await owner.getByRole("button", { name: "Write an update" }).click();

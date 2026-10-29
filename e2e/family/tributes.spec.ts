@@ -25,7 +25,7 @@ test("owner approves the seeded pending tribute; it then appears on the public m
 
   await page.getByRole("main").getByRole("link", { name: "Josephine Adaeze Okafor" }).click();
   await expect(page).toHaveURL(/\/memorials\/[0-9a-f-]{36}$/, nav);
-  await page.getByRole("link", { name: "Tributes" }).click();
+  await page.getByRole("link", { name: "Tributes", exact: true }).click();
   await expect(page).toHaveURL(/\/tributes$/, nav);
 
   const queueItem = page.getByRole("listitem").filter({ hasText: SEED_PENDING });

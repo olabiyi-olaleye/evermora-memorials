@@ -17,7 +17,7 @@ async function signIn(page: import("@playwright/test").Page, email: string) {
 async function openFamily(page: import("@playwright/test").Page) {
   await page.getByRole("main").getByRole("link", { name: "Josephine Adaeze Okafor" }).click();
   await expect(page).toHaveURL(/\/memorials\/[0-9a-f-]{36}$/, { timeout: 45_000 });
-  await page.getByRole("link", { name: "Family access" }).click();
+  await page.getByRole("link", { name: "Family access", exact: true }).click();
   await expect(page).toHaveURL(/\/family$/, { timeout: 45_000 });
 }
 

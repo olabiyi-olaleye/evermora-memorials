@@ -29,7 +29,7 @@ test("owner adds a funeral event, publishes it, and it appears on the public mem
 
   await page.getByRole("main").getByRole("link", { name: "Josephine Adaeze Okafor" }).click();
   await expect(page).toHaveURL(/\/memorials\/[0-9a-f-]{36}$/, nav);
-  await page.getByRole("link", { name: "Funeral" }).click();
+  await page.getByRole("link", { name: "Funeral", exact: true }).click();
   await expect(page).toHaveURL(/\/funeral$/, nav);
 
   // Seeded events are listed.
