@@ -10,19 +10,19 @@ the caller cannot do. This table restates that mapping for product use.
 
 | Permission                                                                        | owner | admin | content_editor | tribute_moderator | viewer |
 | --------------------------------------------------------------------------------- | :---: | :---: | :------------: | :---------------: | :----: |
-| `memorial.edit` — identity, dates, message, publish, archive                      |  done   |  done   |       done       |         —         |   —    |
-| `story.edit` — story sections                                                     |  done   |  done   |       done       |         —         |   —    |
-| `gallery.manage` — albums, media, uploads                                         |  done   |  done   |       done       |         —         |   —    |
-| `funeral.manage` — funeral events                                                 |  done   |  done   |       done       |         —         |   —    |
-| `updates.publish` — family updates                                                |  done   |  done   |       done       |         —         |   —    |
-| `tributes.moderate` — approve/reject/hide tributes, hide remembrances             |  done   |  done   |       —        |        done         |   —    |
-| `admins.manage` — invite/change/remove members, view per-memorial audit           |  done   |  done   |       —        |         —         |   —    |
-| `privacy.manage` — visibility, per-section privacy, search indexing               |  done   |  done   |       —        |         —         |   —    |
-| `billing.manage` — subscription/payment (FUTURE)                                  |  done   |   —   |       —        |         —         |   —    |
-| `memorial.delete` — soft/hard delete the memorial                                 |  done   |   —   |       —        |         —         |   —    |
-| **transfer ownership** (dedicated operation, not a `has_memorial_permission` key) |  done   |   —   |       —        |         —         |   —    |
-| **read `members`-only sections** (family details, burial location, private media) |  done   |  done   |       done       |        done         |   done   |
-| **read the memorial while draft / archived / suspended**                          |  done   |  done   |       done       |        done         |   done   |
+| `memorial.edit` — identity, dates, message, publish, archive                      | done  | done  |      done      |         —         |   —    |
+| `story.edit` — story sections                                                     | done  | done  |      done      |         —         |   —    |
+| `gallery.manage` — albums, media, uploads                                         | done  | done  |      done      |         —         |   —    |
+| `funeral.manage` — funeral events                                                 | done  | done  |      done      |         —         |   —    |
+| `updates.publish` — family updates                                                | done  | done  |      done      |         —         |   —    |
+| `tributes.moderate` — approve/reject/hide tributes, hide remembrances             | done  | done  |       —        |       done        |   —    |
+| `admins.manage` — invite/change/remove members, view per-memorial audit           | done  | done  |       —        |         —         |   —    |
+| `privacy.manage` — visibility, per-section privacy, search indexing               | done  | done  |       —        |         —         |   —    |
+| `billing.manage` — subscription/payment (FUTURE)                                  | done  |   —   |       —        |         —         |   —    |
+| `memorial.delete` — soft/hard delete the memorial                                 | done  |   —   |       —        |         —         |   —    |
+| **transfer ownership** (dedicated operation, not a `has_memorial_permission` key) | done  |   —   |       —        |         —         |   —    |
+| **read `members`-only sections** (family details, burial location, private media) | done  | done  |      done      |       done        |  done  |
+| **read the memorial while draft / archived / suspended**                          | done  | done  |      done      |       done        |  done  |
 
 `viewer` has **read** access to everything on the memorial (including
 `members`-only sections and non-published states) but **no** write permission.

@@ -7,7 +7,7 @@ Three areas, one map. Start with whichever matches your question.
 | **what Evermora is, who it's for, how a screen or flow behaves**   | [product/](./product/) → [product/README.md](./product/README.md)                     |
 | **how it's built** — system, data, security, deploy, experience    | [architecture/](./architecture/) → [architecture/README.md](./architecture/README.md) |
 | **what a business operation does** — inputs, authz, events, errors | [domain/](./domain/) → [domain/README.md](./domain/README.md)                         |
-| **the canonical, approved decisions**                              | [architecture/architecture-spec.md](./architecture/architecture-spec.md)    |
+| **the canonical, approved decisions**                              | [architecture/architecture-spec.md](./architecture/architecture-spec.md)              |
 
 ## Reading order for a new engineer
 

@@ -60,8 +60,8 @@ becomes live only on publish.
 
 | Factory                                                  | Context                                      | Auth                                            | RLS                       |
 | -------------------------------------------------------- | -------------------------------------------- | ----------------------------------------------- | ------------------------- |
-| `createSupabaseBrowserClient({url, anonKey})`            | client components                            | user session from cookies (via `@supabase/ssr`) | done                        |
-| `createSupabaseServerClient({url, anonKey, cookies})`    | Server Components / Actions / Route Handlers | user session via the passed cookie adapter      | done                        |
+| `createSupabaseBrowserClient({url, anonKey})`            | client components                            | user session from cookies (via `@supabase/ssr`) | done                      |
+| `createSupabaseServerClient({url, anonKey, cookies})`    | Server Components / Actions / Route Handlers | user session via the passed cookie adapter      | done                      |
 | `createSupabaseServiceRoleClient({url, serviceRoleKey})` | trusted server code only                     | none (no session)                               | no bypasses RLS by design |
 
 The cookie adapter is a framework-agnostic interface (`getAll` / `setAll`) so

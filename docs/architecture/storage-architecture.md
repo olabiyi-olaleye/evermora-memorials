@@ -18,7 +18,7 @@ the leading UUID from an object name (NULL on malformed names).
 
 | Bucket             | Public | Size cap | MIME allow-list    | Use                                              |
 | ------------------ | :----: | -------- | ------------------ | ------------------------------------------------ |
-| `memorial-public`  |   done   | 25 MB    | images             | published portraits & gallery                    |
+| `memorial-public`  |  done  | 25 MB    | images             | published portraits & gallery                    |
 | `memorial-private` |   —    | 25 MB    | images, mp4, audio | unpublished / members-only media                 |
 | `tribute-uploads`  |   —    | 10 MB    | images             | visitor-submitted tribute media (pre-moderation) |
 | `documents`        |   —    | 15 MB    | pdf, images        | programmes, orders of service, certificates      |

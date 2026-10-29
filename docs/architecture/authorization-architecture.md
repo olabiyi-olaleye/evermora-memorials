@@ -41,16 +41,16 @@ Role names are vocabulary. The authoritative mapping is the SQL function
 
 | permission          | owner | admin | content_editor | tribute_moderator | viewer |
 | ------------------- | :---: | :---: | :------------: | :---------------: | :----: |
-| `memorial.edit`     |  done   |  done   |       done       |         —         |   —    |
-| `story.edit`        |  done   |  done   |       done       |         —         |   —    |
-| `gallery.manage`    |  done   |  done   |       done       |         —         |   —    |
-| `funeral.manage`    |  done   |  done   |       done       |         —         |   —    |
-| `updates.publish`   |  done   |  done   |       done       |         —         |   —    |
-| `tributes.moderate` |  done   |  done   |       —        |        done         |   —    |
-| `admins.manage`     |  done   |  done   |       —        |         —         |   —    |
-| `privacy.manage`    |  done   |  done   |       —        |         —         |   —    |
-| `billing.manage`    |  done   |   —   |       —        |         —         |   —    |
-| `memorial.delete`   |  done   |   —   |       —        |         —         |   —    |
+| `memorial.edit`     | done  | done  |      done      |         —         |   —    |
+| `story.edit`        | done  | done  |      done      |         —         |   —    |
+| `gallery.manage`    | done  | done  |      done      |         —         |   —    |
+| `funeral.manage`    | done  | done  |      done      |         —         |   —    |
+| `updates.publish`   | done  | done  |      done      |         —         |   —    |
+| `tributes.moderate` | done  | done  |       —        |       done        |   —    |
+| `admins.manage`     | done  | done  |       —        |         —         |   —    |
+| `privacy.manage`    | done  | done  |       —        |         —         |   —    |
+| `billing.manage`    | done  |   —   |       —        |         —         |   —    |
+| `memorial.delete`   | done  |   —   |       —        |         —         |   —    |
 
 The domain layer (`@evermora/domain`) should check the **same permission strings**
 before performing an operation, so UI, domain and RLS stay aligned.

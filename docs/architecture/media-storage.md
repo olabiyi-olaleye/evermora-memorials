@@ -16,7 +16,7 @@ This file is the document architecture spec §22 requires (`media-storage.md`).
 
 | Bucket             | Public | Size cap | MIME allow-list            | Purpose                                     |
 | ------------------ | :----: | -------- | -------------------------- | ------------------------------------------- |
-| `memorial-public`  |   done   | 25 MB    | jpeg, png, webp, avif, gif | published portraits & gallery               |
+| `memorial-public`  |  done  | 25 MB    | jpeg, png, webp, avif, gif | published portraits & gallery               |
 | `memorial-private` |   —    | 25 MB    | images + mp4 + audio       | unpublished / members-only media            |
 | `tribute-uploads`  |   —    | 10 MB    | jpeg, png, webp, avif      | visitor tribute media, pre-moderation       |
 | `documents`        |   —    | 15 MB    | pdf + images               | programmes, orders of service, certificates |

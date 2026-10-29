@@ -205,11 +205,11 @@ staging and production are **not created** (free-tier limits). Details:
 
 ## Documentation
 
-| Area                                            | Start here                                                                                   |
-| ----------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| **Product** — what Evermora is & how it behaves | [`docs/product/README.md`](docs/product/README.md)                                           |
-| **Architecture** — how it's built               | [`docs/architecture/README.md`](docs/architecture/README.md)                                 |
-| **Domain** — the business operations (specs)    | [`docs/domain/README.md`](docs/domain/README.md)                                             |
+| Area                                            | Start here                                                                         |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------- |
+| **Product** — what Evermora is & how it behaves | [`docs/product/README.md`](docs/product/README.md)                                 |
+| **Architecture** — how it's built               | [`docs/architecture/README.md`](docs/architecture/README.md)                       |
+| **Domain** — the business operations (specs)    | [`docs/domain/README.md`](docs/domain/README.md)                                   |
 | Canonical decisions                             | [`docs/architecture/architecture-spec.md`](docs/architecture/architecture-spec.md) |
 
 There is intentionally **no `docs/api/`** — HTTP endpoints, if any, are

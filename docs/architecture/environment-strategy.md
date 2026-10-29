@@ -38,9 +38,9 @@ validated at import time by `@evermora/config`'s Zod `createEnv`
 | Variable                                                                   | Client-safe?                          | Consumed by                     |
 | -------------------------------------------------------------------------- | ------------------------------------- | ------------------------------- |
 | `APP_ENV` (`development`\|`staging`\|`production`)                         | server                                | all apps                        |
-| `NEXT_PUBLIC_APP_URL` / `NEXT_PUBLIC_FAMILY_URL` / `NEXT_PUBLIC_ADMIN_URL` | done client                             | respective app                  |
-| `NEXT_PUBLIC_SUPABASE_URL`                                                 | done client                             | all apps                        |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY`                                            | done client (still RLS-bound)           | all apps                        |
+| `NEXT_PUBLIC_APP_URL` / `NEXT_PUBLIC_FAMILY_URL` / `NEXT_PUBLIC_ADMIN_URL` | done client                           | respective app                  |
+| `NEXT_PUBLIC_SUPABASE_URL`                                                 | done client                           | all apps                        |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY`                                            | done client (still RLS-bound)         | all apps                        |
 | `SUPABASE_SERVICE_ROLE_KEY`                                                | **server only** — bypasses RLS        | family-portal, platform-admin   |
 | `DATABASE_URL`                                                             | **server only** — Drizzle + `db:pull` | server code / tooling           |
 | `EMAIL_PROVIDER_API_KEY`                                                   | server only                           | notification service (DEFERRED) |

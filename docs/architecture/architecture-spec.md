@@ -25,37 +25,37 @@ Key changes from v1:
 
 ## 1. APPLICATION AND REPOSITORY NAME
 
-| Thing | Value |
-|---|---|
-| Application name | **Evermora** |
-| Local root folder | `evermora` |
-| GitHub repository | `evermora` |
+| Thing             | Value        |
+| ----------------- | ------------ |
+| Application name  | **Evermora** |
+| Local root folder | `evermora`   |
+| GitHub repository | `evermora`   |
 
 ---
 
 ## 2. APPROVED CORE TECHNOLOGY STACK (LOCKED)
 
-| Layer | Choice |
-|---|---|
-| Frontend | React, Next.js, TypeScript, Tailwind CSS |
-| Package manager | npm |
-| Workspaces | npm Workspaces |
-| Monorepo orchestration | Turborepo |
-| Application / transport layer | Next.js server capabilities (Server Actions + Route Handlers) |
-| Domain / business layer | `packages/domain` — framework-independent TypeScript |
-| Database | PostgreSQL via Supabase |
-| DB access (session-aware / RLS-bound / auth / storage / realtime) | supabase-js |
-| DB access (typed server writes, complex reads, transactions, joins) | Drizzle |
-| Migration authority | Supabase CLI + version-controlled SQL migrations (**single source of truth**) |
-| Authentication | Supabase Auth |
-| Storage | Supabase Storage |
-| Database security | Supabase Row Level Security |
-| Env validation | Zod (foundations in `packages/config`) |
-| Testing | Vitest, React Testing Library, Playwright, dedicated RLS/DB security tests |
-| Source control | GitHub |
-| CI (quality gates) | GitHub Actions |
-| Hosting / deployment | Vercel |
-| PWA | Mobile-first PWA (maintained standards-based service worker, e.g. Serwist) |
+| Layer                                                               | Choice                                                                        |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Frontend                                                            | React, Next.js, TypeScript, Tailwind CSS                                      |
+| Package manager                                                     | npm                                                                           |
+| Workspaces                                                          | npm Workspaces                                                                |
+| Monorepo orchestration                                              | Turborepo                                                                     |
+| Application / transport layer                                       | Next.js server capabilities (Server Actions + Route Handlers)                 |
+| Domain / business layer                                             | `packages/domain` — framework-independent TypeScript                          |
+| Database                                                            | PostgreSQL via Supabase                                                       |
+| DB access (session-aware / RLS-bound / auth / storage / realtime)   | supabase-js                                                                   |
+| DB access (typed server writes, complex reads, transactions, joins) | Drizzle                                                                       |
+| Migration authority                                                 | Supabase CLI + version-controlled SQL migrations (**single source of truth**) |
+| Authentication                                                      | Supabase Auth                                                                 |
+| Storage                                                             | Supabase Storage                                                              |
+| Database security                                                   | Supabase Row Level Security                                                   |
+| Env validation                                                      | Zod (foundations in `packages/config`)                                        |
+| Testing                                                             | Vitest, React Testing Library, Playwright, dedicated RLS/DB security tests    |
+| Source control                                                      | GitHub                                                                        |
+| CI (quality gates)                                                  | GitHub Actions                                                                |
+| Hosting / deployment                                                | Vercel                                                                        |
+| PWA                                                                 | Mobile-first PWA (maintained standards-based service worker, e.g. Serwist)    |
 
 **Do not use** pnpm, yarn, or bun. **Do not use** Prisma. **Do not** create
 `pnpm-workspace.yaml`.
@@ -138,7 +138,7 @@ Document every command in `README.md`.
 
 ## 6. APPLICATION RESPONSIBILITIES
 
-### apps/web  (public — must stay lightweight)
+### apps/web (public — must stay lightweight)
 
 - Evermora marketing website
 - Public memorial experience: biographies, stories, gallery, approved tributes,
@@ -154,7 +154,7 @@ Public memorial URLs use `evermora.com/{memorial-slug}` (e.g.
 **Do not** bundle the authenticated family dashboard into the public memorial experience
 (see §19).
 
-### apps/family-portal  (authenticated)
+### apps/family-portal (authenticated)
 
 Authentication; memorial creation, editing, and **draft preview**; story management;
 photo/gallery management; tribute moderation; funeral management; family updates;
@@ -163,7 +163,7 @@ requests; notifications; account settings; billing when introduced.
 
 Preferred production domain: `family.evermora.com`.
 
-### apps/platform-admin  (internal — kept separate on purpose)
+### apps/platform-admin (internal — kept separate on purpose)
 
 Internal Evermora administration: users, memorials, moderation, reports, service
 requests, payments, subscriptions, support, analytics, platform configuration, audit
@@ -412,8 +412,8 @@ Do not treat Supabase authentication as authorization.
 auth.users → profiles → memorial_memberships → memorials
 ```
 
-- Authentication answers: *who is this person?*
-- Authorization answers: *what may this person do?*
+- Authentication answers: _who is this person?_
+- Authorization answers: _what may this person do?_
 
 Authorization is enforced in three layers:
 
@@ -480,12 +480,12 @@ Never assume RLS is correct just because policies exist.
 
 ## 17. TESTING STACK (LOCKED)
 
-| Tool | Scope |
-|---|---|
-| **Vitest** | domain unit tests, utility tests, server/application logic |
-| **React Testing Library** | important UI/component behavior |
-| **Playwright** | e2e: family workflows, public visitor flows, tribute submission/moderation, memorial publishing, funeral publishing, authentication, privacy boundaries |
-| **Dedicated RLS/DB security tests** | the scenarios in §16, run against real policies as different DB roles |
+| Tool                                | Scope                                                                                                                                                   |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Vitest**                          | domain unit tests, utility tests, server/application logic                                                                                              |
+| **React Testing Library**           | important UI/component behavior                                                                                                                         |
+| **Playwright**                      | e2e: family workflows, public visitor flows, tribute submission/moderation, memorial publishing, funeral publishing, authentication, privacy boundaries |
+| **Dedicated RLS/DB security tests** | the scenarios in §16, run against real policies as different DB roles                                                                                   |
 
 Do not suppress meaningful errors to get a green run.
 
@@ -667,12 +667,12 @@ Rules:
 
 Production domains (do not hardcode — use environment variables):
 
-| Surface | Domain |
-|---|---|
-| Public website + memorial experience | `evermora.com` |
-| Family portal | `family.evermora.com` |
-| Platform admin | `admin.evermora.com` |
-| Individual memorial | `evermora.com/{memorial-slug}` |
+| Surface                              | Domain                         |
+| ------------------------------------ | ------------------------------ |
+| Public website + memorial experience | `evermora.com`                 |
+| Family portal                        | `family.evermora.com`          |
+| Platform admin                       | `admin.evermora.com`           |
+| Individual memorial                  | `evermora.com/{memorial-slug}` |
 
 Families can choose/customize the memorial slug. Do not claim a domain is connected
 until ownership and DNS are confirmed.
@@ -770,11 +770,11 @@ deleting it from the latest commit is sufficient.
 
 Connect the GitHub monorepo to Vercel. Create/configure:
 
-| Vercel project | Root directory |
-|---|---|
-| `evermora-web` | `apps/web` |
-| `evermora-family` | `apps/family-portal` |
-| `evermora-admin` | `apps/platform-admin` |
+| Vercel project    | Root directory        |
+| ----------------- | --------------------- |
+| `evermora-web`    | `apps/web`            |
+| `evermora-family` | `apps/family-portal`  |
+| `evermora-admin`  | `apps/platform-admin` |
 
 **Do not create `evermora-api`.**
 
@@ -1130,32 +1130,32 @@ Evermora product principles for implementation convenience.
 
 ## 40. FINAL LOCKED DECISIONS
 
-| # | Decision |
-|---|---|
-| REMOVE | `apps/api` as an initial deployable application |
-| REMOVE | `docs/api/` for the MVP |
-| ADD | `packages/domain` (framework-independent business/domain layer) |
-| RENAME | `docs/api/` → `docs/domain/` (transport-independent domain contracts, not HTTP) |
-| LOCK | 3 deployable Next.js applications: `web`, `family-portal`, `platform-admin` |
-| LOCK | React + Next.js + TypeScript + Tailwind CSS |
-| LOCK | npm + npm Workspaces + Turborepo |
-| LOCK | GitHub + GitHub Actions |
-| LOCK | Vercel (3 projects: `evermora-web`, `evermora-family`, `evermora-admin`) |
-| LOCK | Supabase PostgreSQL + Auth + Storage + RLS |
-| LOCK | supabase-js + Drizzle |
-| LOCK | Supabase SQL migrations as the single migration authority |
-| LOCK | Vitest + React Testing Library + Playwright + dedicated RLS/DB tests |
-| LOCK | Zod environment validation (foundations in `packages/config`) |
-| LOCK | Isolated family/admin sessions for MVP (no shared `.evermora.com` cookie) |
-| LOCK | Family-portal-based draft preview (no authed preview on `evermora.com/{slug}`) |
-| LOCK | `evermora.com/{memorial-slug}` (never `/m/`); reserved route registry from day one |
-| LOCK | Permanent QR resolver architecture |
-| LOCK | Node 22 LTS preferred; single pinned version across all apps |
-| LOCK | Shared Next/React/React-DOM versions across all apps |
-| LOCK | Owned shadcn-style design system in `packages/ui`; editorial public memorial |
-| LOCK | PWA for `web` + `family-portal` only (prefer Serwist) |
-| DEFER (behind abstraction) | Email provider (Resend / Postmark / …) |
-| DEFER (behind abstraction) | Image transformation provider (Supabase / Vercel / combination) |
+| #                          | Decision                                                                           |
+| -------------------------- | ---------------------------------------------------------------------------------- |
+| REMOVE                     | `apps/api` as an initial deployable application                                    |
+| REMOVE                     | `docs/api/` for the MVP                                                            |
+| ADD                        | `packages/domain` (framework-independent business/domain layer)                    |
+| RENAME                     | `docs/api/` → `docs/domain/` (transport-independent domain contracts, not HTTP)    |
+| LOCK                       | 3 deployable Next.js applications: `web`, `family-portal`, `platform-admin`        |
+| LOCK                       | React + Next.js + TypeScript + Tailwind CSS                                        |
+| LOCK                       | npm + npm Workspaces + Turborepo                                                   |
+| LOCK                       | GitHub + GitHub Actions                                                            |
+| LOCK                       | Vercel (3 projects: `evermora-web`, `evermora-family`, `evermora-admin`)           |
+| LOCK                       | Supabase PostgreSQL + Auth + Storage + RLS                                         |
+| LOCK                       | supabase-js + Drizzle                                                              |
+| LOCK                       | Supabase SQL migrations as the single migration authority                          |
+| LOCK                       | Vitest + React Testing Library + Playwright + dedicated RLS/DB tests               |
+| LOCK                       | Zod environment validation (foundations in `packages/config`)                      |
+| LOCK                       | Isolated family/admin sessions for MVP (no shared `.evermora.com` cookie)          |
+| LOCK                       | Family-portal-based draft preview (no authed preview on `evermora.com/{slug}`)     |
+| LOCK                       | `evermora.com/{memorial-slug}` (never `/m/`); reserved route registry from day one |
+| LOCK                       | Permanent QR resolver architecture                                                 |
+| LOCK                       | Node 22 LTS preferred; single pinned version across all apps                       |
+| LOCK                       | Shared Next/React/React-DOM versions across all apps                               |
+| LOCK                       | Owned shadcn-style design system in `packages/ui`; editorial public memorial       |
+| LOCK                       | PWA for `web` + `family-portal` only (prefer Serwist)                              |
+| DEFER (behind abstraction) | Email provider (Resend / Postmark / …)                                             |
+| DEFER (behind abstraction) | Image transformation provider (Supabase / Vercel / combination)                    |
 
 **Do not begin major feature implementation until the updated architecture is
 documented and the Phase 0 foundation is verified.**
